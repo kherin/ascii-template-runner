@@ -49,14 +49,23 @@ function doesItHitObstacle(userPositionIndex, nextRaceLine) {
     return itHits;
 }
 
+function containsObstacles(raceLine) {
+    return raceLine.split('').some(structure => obstacles.includes(structure));
+}
+
+function displayTotalScore(score) {
+    console.log('Total Score: ', score);
+}
+
 (function () {
 
+    let totalScore = 0;
     let run = true;
     let currentUserPosition = 2;
     let addNextObstacle = true;
     let raceTrack = [...generateLines(1, false), ...generateLines(1, true), ...generateLines(3, false), ...generateLines(1, true), ...generateLines(3, false), '|.X.|'];
 
-    console.log('use A(left), D(right) to steer, W(Move Forward). Quit(Q)');
+    console.log('Use A(left), D(right) to steer, W(Move Forward). Quit(Q)');
 
     while (run) {
         logUpdate(displayRaceTrack(raceTrack));
@@ -71,23 +80,33 @@ function doesItHitObstacle(userPositionIndex, nextRaceLine) {
             currentUserPosition = currentUserPosition - 1;
             if (currentUserPosition == 0) {
                 console.log('You hit the runway edge.');
+                displayTotalScore(totalScore);
                 break;
             }
         } else if (command == 'D') {
             currentUserPosition = currentUserPosition + 1;
             if (currentUserPosition == 4) {
                 console.log('You hit the runway edge.');
+                displayTotalScore(totalScore);
                 break;
             }
         } else if (command == 'Q') {
             console.log('You left the game.');
+            displayTotalScore(totalScore);
             break;
         }
 
         const nextRaceLine = raceTrack[raceTrack.length - 2];
         if (doesItHitObstacle(currentUserPosition, nextRaceLine)) {
             console.log('GAME OVER');
+            displayTotalScore(totalScore);
             break;
+        }
+
+        if (containsObstacles(nextRaceLine)) {
+            totalScore += 5;
+        } else {
+            totalScore += 1;
         }
 
         let nextRaceLineSplits = nextRaceLine.split('');
