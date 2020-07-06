@@ -1,0 +1,25 @@
+{
+  "name": "ascii-template-runner",
+  "version": "1.0.0",
+  "description": "Using node.js to create an experimental and basic cmd-line game based on template run.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kherin/ascii-template-runner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kherin/ascii-template-runner/issues"
+  },
+  "homepage": "https://github.com/kherin/ascii-template-runner#readme",
+  "dependencies": {
+    "log-update": "^4.0.0",
+    "readline-sync": "^1.4.10"
+  }
+}
